@@ -5,16 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
-import javax.swing.JTable;
-import javax.swing.JTextField;
+
 import javax.swing.table.DefaultTableModel;
 
 
 public class ConexionBBDD {
 
-	private String bd;
 	private String url= "jdbc:oracle:thin:@localhost:1521:XE";
 	private String usr = "SYSTEM";
 	private String pwd = "lorca1";
@@ -129,7 +126,23 @@ public class ConexionBBDD {
 			return resultado;
 			
 		}
-			
 		
-
+		public int ConsultaModificarPRODUCTOS() {
+			int resultado = 0;
+			String update = "UPDATE LORCA1.PRODUCTO SET ID_PRODUCTO="+PRODUCTOS.ID_PROD+", NOMBRE_PRODUCTO ='"+ PRODUCTOS.NOM + "',  STOCK = "+PRODUCTOS.STCK+", ID_CATEGORIA = "+PRODUCTOS.ID_CAT+", PRECIO ="+ PRODUCTOS.PREC+" "
+					+ "WHERE ID_PRODUCTO ="+PRODUCTOS.ID_PROD+" ";
+			System.out.println(update);
+			try {
+				Statement stmt = conexion.createStatement();
+				int rset = stmt.executeUpdate(update);
+				
+				stmt.close();
+				
+			}catch (SQLException s){
+				s.printStackTrace();
+			}
+			return resultado;
+			
+		}
+			
 }

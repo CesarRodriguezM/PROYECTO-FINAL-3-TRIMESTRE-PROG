@@ -64,6 +64,7 @@ public class PRODUCTOS {
 		frame.getContentPane().add(scrollPane);
 		
 		table = new JTable();
+		
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null},
@@ -75,6 +76,26 @@ public class PRODUCTOS {
 			}
 		));
 		scrollPane.setViewportView(table);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				int seleccion = table.rowAtPoint(arg0.getPoint());
+				ID_PRODUCTO.setText((String)table.getValueAt(seleccion, 0));
+				NOM_PRODUCTO.setText((String)table.getValueAt(seleccion, 1));
+				STOCK.setText((String)table.getValueAt(seleccion, 2));
+				ID_CATEGORIA.setText((String)table.getValueAt(seleccion, 3));
+				PRECIO.setText((String)table.getValueAt(seleccion, 4));
+				
+				ID_PROD = ID_PRODUCTO.getText();
+				NOM = NOM_PRODUCTO.getText();
+				STCK = STOCK.getText();
+				ID_CAT=ID_CATEGORIA.getText();
+				PREC = PRECIO.getText();
+			}
+		});
+		
+		
+		//BOTON LISTAR
 		
 		JButton btnNewButton = new JButton("LISTAR PRODUCTOS");
 		btnNewButton.setBounds(523, 379, 133, 34);
@@ -84,6 +105,9 @@ public class PRODUCTOS {
 		lblNewLabel.setBounds(30, 31, 419, 34);
 		lblNewLabel.setFont(new Font("NSimSun", Font.BOLD | Font.ITALIC, 26));
 		frame.getContentPane().add(lblNewLabel);
+		
+		
+		//BOTON AÑADIR
 		
 		JButton btnNewButton_1 = new JButton("A\u00D1ADIR");
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -167,6 +191,8 @@ public class PRODUCTOS {
 		lblNewLabel_4.setBounds(30, 244, 46, 14);
 		frame.getContentPane().add(lblNewLabel_4);
 		
+		//BOTON VOLVER AL MENU 
+		
 		JButton btnNewButton_3 = new JButton("<< VOLVER AL MEN\u00DA");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -178,6 +204,9 @@ public class PRODUCTOS {
 		btnNewButton_3.setBounds(646, 492, 194, 34);
 		frame.getContentPane().add(btnNewButton_3);
 		
+		
+		//BOTON ATRÁS
+		
 		JButton btnNewButton_4 = new JButton("ATR\u00C1S");
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -188,11 +217,20 @@ public class PRODUCTOS {
 		btnNewButton_4.setBounds(722, 11, 118, 34);
 		frame.getContentPane().add(btnNewButton_4);
 		
+		
+		//BOTON MODIFICAR
 		JButton btnModificar = new JButton("MODIFICAR PRODUCTO");
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				 ID_PROD = ID_PRODUCTO.getText();
+				 NOM = NOM_PRODUCTO.getText();
+				 STCK = STOCK.getText();
+				 ID_CAT=ID_CATEGORIA.getText();
+				 PREC = PRECIO.getText();
 				
+				
+				conexion.ConsultaModificarPRODUCTOS();
 			}
 		});
 		btnModificar.setBounds(184, 379, 163, 34);
@@ -207,6 +245,8 @@ public class PRODUCTOS {
 				table.setModel(conexion.ConsultaTablaListarPRODUCTOS());
 			}
 		});
+		
+		
 		
 		
 	}
