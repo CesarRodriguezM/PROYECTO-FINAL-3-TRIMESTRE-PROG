@@ -144,5 +144,22 @@ public class ConexionBBDD {
 			return resultado;
 			
 		}
+		
+		public int ConsultaModificarCATEGORIA() {
+			int resultado = 0;
+			String update = "UPDATE LORCA1.CATEGORIA SET Id_Categoria="+CATEGORIA.ID_CAT+", Nom_Categoria='"+ CATEGORIA.NOM + "', Descripcion= '"+CATEGORIA.DESCRIPCION+"' " + "WHERE Id_Categoria="+CATEGORIA.ID_CAT+" ";
+			System.out.println(update);
+			try {
+				Statement stmt = conexion.createStatement();
+				int rset = stmt.executeUpdate(update);
+				
+				stmt.close();
+				
+			}catch (SQLException s){
+				s.printStackTrace();
+			}
+			return resultado;
+			
+		}
 			
 }

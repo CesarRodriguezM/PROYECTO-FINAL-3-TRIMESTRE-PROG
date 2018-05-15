@@ -65,7 +65,7 @@ public class USUARIOLOGIN {
 					
 
 				}else {
-					JOptionPane.showMessageDialog(frame,"error en usuario ");
+					JOptionPane.showMessageDialog(frame,"USUARIO O CONTRASEÑA NO VÁLIDO");
 					
 				}
 				

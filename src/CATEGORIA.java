@@ -11,6 +11,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class CATEGORIA {
 
@@ -66,6 +68,18 @@ public class CATEGORIA {
 		frame.getContentPane().add(scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				int seleccion = table.rowAtPoint(arg0.getPoint());
+				Id_categoria.setText((String)table.getValueAt(seleccion, 0));
+				Nom_categoria.setText((String)table.getValueAt(seleccion, 1));
+				descripcion.setText((String)table.getValueAt(seleccion, 2));
+				
+				
+			}
+		});
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null},
@@ -135,6 +149,14 @@ public class CATEGORIA {
 		JButton btnNewButton = new JButton("MODIFICAR CATEGORIA");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				ID_CAT = Id_categoria.getText();
+				NOM = Nom_categoria.getText();
+				DESCRIPCION = descripcion.getText();
+				
+				
+				conexion.ConsultaModificarCATEGORIA();
+				
 			}
 		});
 		btnNewButton.setBounds(138, 351, 153, 23);
