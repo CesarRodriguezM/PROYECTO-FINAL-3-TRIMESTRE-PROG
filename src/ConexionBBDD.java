@@ -161,5 +161,39 @@ public class ConexionBBDD {
 			return resultado;
 			
 		}
+		
+		public int ConsultaBORRARPRODUCTO() {
+			int resultado = 0;
+			String update = "DELETE LORCA1.PRODUCTO WHERE ID_PRODUCTO="+PRODUCTOS.ID_PROD+" AND NOMBRE_PRODUCTO ='"+ PRODUCTOS.NOM + "' AND  STOCK = "+PRODUCTOS.STCK+" AND ID_CATEGORIA = "+PRODUCTOS.ID_CAT+" AND PRECIO ="+ PRODUCTOS.PREC+" ";
+			System.out.println(update);
+			try {
+				Statement stmt = conexion.createStatement();
+				int rset = stmt.executeUpdate(update);
+				
+				stmt.close();
+				
+			}catch (SQLException s){
+				s.printStackTrace();
+			}
+			return resultado;
+			
+		}
+		
+		public int ConsultaBORRARCATEGORIA() {
+			int resultado = 0;
+			String update = "DELETE LORCA1.CATEGORIA WHERE Id_Categoria="+CATEGORIA.ID_CAT+" AND Nom_Categoria='"+ CATEGORIA.NOM + "' AND Descripcion= '"+CATEGORIA.DESCRIPCION+"'";
+			System.out.println(update);
+			try {
+				Statement stmt = conexion.createStatement();
+				int rset = stmt.executeUpdate(update);
+				
+				stmt.close();
+				
+			}catch (SQLException s){
+				s.printStackTrace();
+			}
+			return resultado;
+			
+		}
 			
 }

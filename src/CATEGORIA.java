@@ -31,18 +31,7 @@ public class CATEGORIA {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CATEGORIA window = new CATEGORIA();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the application.
@@ -159,9 +148,11 @@ public class CATEGORIA {
 				
 			}
 		});
-		btnNewButton.setBounds(138, 351, 153, 23);
+		btnNewButton.setBounds(120, 351, 171, 23);
 		frame.getContentPane().add(btnNewButton);
 		
+		
+		//BOTON BORRAR CONTIENE LA CONEXION A LA BBDD
 		JButton btnBorrar = new JButton("BORRAR");
 		btnBorrar.addActionListener(new ActionListener() {
 			
@@ -171,13 +162,16 @@ public class CATEGORIA {
 				Nom_categoria.setText("");
 				descripcion.setText("");
 				
-				
+				conexion.ConsultaBORRARCATEGORIA();
 				
 				
 			}
 		});
-		btnBorrar.setBounds(311, 351, 89, 23);
+		btnBorrar.setBounds(120, 198, 89, 23);
 		frame.getContentPane().add(btnBorrar);
+		
+		
+		//BOTON LISTAR CONTIENE LA CONEXION A LA BBDD
 		
 		JButton btnListar = new JButton("LISTAR  CATEGORIA");
 		btnListar.addActionListener(new ActionListener() {
@@ -190,8 +184,11 @@ public class CATEGORIA {
 				
 			}
 		});
-		btnListar.setBounds(446, 351, 133, 23);
+		btnListar.setBounds(436, 351, 143, 23);
 		frame.getContentPane().add(btnListar);
+		
+		
+		//BOTON SALIR AL MENU
 		
 		JButton button = new JButton("<< SALIR AL MENU");
 		button.addActionListener(new ActionListener() {
@@ -203,6 +200,8 @@ public class CATEGORIA {
 		button.setBounds(404, 418, 175, 25);
 		frame.getContentPane().add(button);
 		
+		
+		//BOTON ATRAS
 		JButton btnAtras = new JButton("ATRAS");
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -215,5 +214,21 @@ public class CATEGORIA {
 		});
 		btnAtras.setBounds(476, 11, 89, 23);
 		frame.getContentPane().add(btnAtras);
+		
+		//BOTON ELIMINAR CATEGORIA CONTIENE CONEXION A LA BBDD
+		
+		JButton btnNewButton_1 = new JButton("ELIMINAR CATEGORIA");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ID_CAT = Id_categoria.getText();
+				 NOM = Nom_categoria.getText();
+				 DESCRIPCION = descripcion.getText();
+				
+				conexion.ConsultaBORRARCATEGORIA();
+			}
+		});
+		btnNewButton_1.setBounds(301, 351, 125, 23);
+		frame.getContentPane().add(btnNewButton_1);
 	}
 }

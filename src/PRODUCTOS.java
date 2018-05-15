@@ -75,7 +75,7 @@ public class PRODUCTOS {
 				"ID_PRODUCTO", "NOMBRE_PRODUCTO", "STOCK", "ID_CATEGORIA", "PRECIO"
 			}
 		));
-		scrollPane.setViewportView(table);
+		scrollPane.setViewportView(table); /* Evento que permite extraer el contenido de la tabla llevarlo a los campos texto y así poder modificar con facilidad  */
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -97,8 +97,8 @@ public class PRODUCTOS {
 		
 		//BOTON LISTAR
 		
-		JButton btnNewButton = new JButton("LISTAR PRODUCTOS");
-		btnNewButton.setBounds(523, 379, 133, 34);
+		JButton btnNewButton = new JButton("LISTAR PRODUCTOS"); 
+		btnNewButton.setBounds(547, 379, 133, 34);
 		frame.getContentPane().add(btnNewButton);
 		
 		lblNewLabel = new JLabel("PRODUCTOS");
@@ -161,6 +161,8 @@ public class PRODUCTOS {
 		lblNewLabel_1.setBounds(10, 141, 90, 17);
 		frame.getContentPane().add(lblNewLabel_1);
 		
+		
+		//PERMITE BORRAR LOS CAMPOS DE TEXTO
 		JButton btnNewButton_2 = new JButton("BORRAR");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -176,7 +178,7 @@ public class PRODUCTOS {
 		
 			}
 		});
-		btnNewButton_2.setBounds(368, 379, 133, 34);
+		btnNewButton_2.setBounds(56, 285, 133, 34);
 		frame.getContentPane().add(btnNewButton_2);
 		
 		JLabel lblNewLabel_2 = new JLabel("STOCK");
@@ -196,8 +198,8 @@ public class PRODUCTOS {
 		JButton btnNewButton_3 = new JButton("<< VOLVER AL MEN\u00DA");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MENU MENU = new MENU();
-				MENU.frame.setVisible(true);
+				MENU MENU = new MENU(); //PERMITE IR HACIA ATRÁS
+				MENU.frame.setVisible(true);//IMPORTANTE TAMBIÉN PONER ESTO TANTO PARA ATRÁS COMO HACIA ADELANTE
 			}
 		});
 		btnNewButton_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -230,11 +232,23 @@ public class PRODUCTOS {
 				 PREC = PRECIO.getText();
 				
 				
-				conexion.ConsultaModificarPRODUCTOS();
+				conexion.ConsultaModificarPRODUCTOS(); //ENLACE A CONEXION BBDD
 			}
 		});
 		btnModificar.setBounds(184, 379, 163, 34);
 		frame.getContentPane().add(btnModificar);
+		
+		
+		//EVENTO ELIMINAR PRODUCTOS
+		JButton btnNewButton_5 = new JButton("ELIMINAR PRODUCTOS");
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				conexion.ConsultaBORRARPRODUCTO();
+			}
+		});
+		btnNewButton_5.setBounds(360, 379, 163, 34);
+		frame.getContentPane().add(btnNewButton_5);
 		
 		//Evento del boton LISTAR PRODUCTOS
 		
@@ -242,7 +256,7 @@ public class PRODUCTOS {
 			public void actionPerformed(ActionEvent e) {
 				
 				
-				table.setModel(conexion.ConsultaTablaListarPRODUCTOS());
+				table.setModel(conexion.ConsultaTablaListarPRODUCTOS()); // CONEXION A CONEXION BBDD
 			}
 		});
 		
