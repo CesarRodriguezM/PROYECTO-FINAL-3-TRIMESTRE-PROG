@@ -226,6 +226,7 @@ public class CATEGORIA {
 				 DESCRIPCION = descripcion.getText();
 				
 				conexion.ConsultaBORRARCATEGORIA();
+				table.setModel(conexion.ConsultaTablaListarCATEGORIA());
 			}
 		});
 		btnNewButton_1.setBounds(301, 351, 125, 23);
