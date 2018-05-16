@@ -115,7 +115,7 @@ public class CATEGORIA {
 		JLabel lblNewLabel_2 = new JLabel("Descripcion");
 		lblNewLabel_2.setBounds(34, 155, 58, 14);
 		frame.getContentPane().add(lblNewLabel_2);
-		
+		//BOTON AÑADIR
 		JButton btnAadir = new JButton("A\u00D1ADIR");
 		btnAadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -135,7 +135,7 @@ public class CATEGORIA {
 		});
 		btnAadir.setBounds(14, 351, 89, 23);
 		frame.getContentPane().add(btnAadir);
-		
+		//BOTON MODIFICAR
 		JButton btnNewButton = new JButton("MODIFICAR CATEGORIA");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

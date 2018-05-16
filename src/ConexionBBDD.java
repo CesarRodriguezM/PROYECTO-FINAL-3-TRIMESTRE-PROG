@@ -195,5 +195,63 @@ public class ConexionBBDD {
 			return resultado;
 			
 		}
+		public DefaultTableModel ConsultaTablaListarComanda() {
+			String [] columnas={"CANTIDAD_PEDIDO ","PEDIDO_CLIENTE","ID_CLIENTE","ID_PEDIDO"};
+			String [] registro=new String[4];
+			DefaultTableModel ModeloTabla = new DefaultTableModel(null,columnas);
+			String query = "SELECT * FROM LORCA1.PEDIR ORDER BY ID_CLIENTE ASC";
+			 
+			try {
+				Statement stmt = conexion.createStatement();
+				ResultSet rset = stmt.executeQuery(query);
+				while(rset.next()) {
+					 registro[0]=rset.getString("CANTIDAD_PEDIDO");
+			         registro[1]=rset.getString("PEDIDO_CLIENTE");
+			         registro[2]=rset.getString("ID_CLIENTE");
+			         registro[3]=rset.getString("ID_PEDIDO");
+			         ModeloTabla.addRow(registro);
+				}
+				rset.close();
+				stmt.close();
+				
+			}catch (SQLException s){
+				s.printStackTrace();
+			}
 			
+			return ModeloTabla;
+			
+		}	
+		public int ConsultaAñadirPedirComanda() {
+			int resultado = 0;
+			String update = "INSERT INTO LORCA1.PEDIR VALUES ('"+AÑADIRCOMANDA.CANTIDAD_PEDIDO + "' , '" + AÑADIRCOMANDA.PEDIDO_CLIENTE + "' , " + AÑADIRCOMANDA.ID_CLIENTE + ", " +AÑADIRCOMANDA.ID_PEDIDO+" )";
+			System.out.println(update);
+			try {
+				Statement stmt = conexion.createStatement();
+				int rset = stmt.executeUpdate(update );
+				
+				stmt.close();
+				
+			}catch (SQLException s){
+				s.printStackTrace();
+			}
+			return resultado;
+			
+		}
+		public int ConsultaBORRARComanda() {
+			
+			int resultado = 0;
+			String update = "DELETE LORCA1.PEDIR WHERE CANTIDAD_PEDIDO="+AÑADIRCOMANDA.CANTIDAD_PEDIDO+" AND PEDIDO_CLIENTE='"+ AÑADIRCOMANDA.PEDIDO_CLIENTE + "' AND ID_CLIENTE= "+AÑADIRCOMANDA.ID_CLIENTE+" AND ID_PEDIDO="+ AÑADIRCOMANDA.ID_PEDIDO+"";
+			System.out.println(update);
+			try {
+				Statement stmt = conexion.createStatement();
+				int rset = stmt.executeUpdate(update);
+				
+				stmt.close();
+				
+			}catch (SQLException s){
+				s.printStackTrace();
+			}
+			return resultado;
+			
+		}
 }
