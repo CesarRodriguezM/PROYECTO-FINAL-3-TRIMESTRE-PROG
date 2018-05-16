@@ -20,27 +20,19 @@ public class INICIARNUEVOPEDIDO {
 	static JFrame frame;
 	private JTextField CANTIDAD_PEDIDO;
 	private JTable table;
+	private JTextField txtIdpedido;
+	private ConexionBBDD conexion;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					INICIARNUEVOPEDIDO window = new INICIARNUEVOPEDIDO();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the application.
 	 */
 	public INICIARNUEVOPEDIDO() {
+		conexion = new ConexionBBDD();
 		initialize();
 	}
 
@@ -77,31 +69,20 @@ public class INICIARNUEVOPEDIDO {
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("A\u00D1ADIR PEDIDO");
-		btnNewButton_2.setBounds(22, 337, 182, 39);
+		btnNewButton_2.setBounds(22, 337, 201, 39);
 		frame.getContentPane().add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("BORRAR ");
-		btnNewButton_3.setBounds(529, 337, 163, 39);
+		btnNewButton_3.setBounds(33, 234, 163, 39);
 		frame.getContentPane().add(btnNewButton_3);
 		
-		JButton btnNewButton_4 = new JButton("MODIFICAR PEDIDO");
-		btnNewButton_4.setBounds(301, 338, 163, 36);
+		JButton btnNewButton_4 = new JButton("ELIMINAR PEDIDO");
+		btnNewButton_4.setBounds(301, 338, 182, 36);
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
 		frame.getContentPane().add(btnNewButton_4);
-		
-		JComboBox SeleccionarCategoria = new JComboBox();
-		SeleccionarCategoria.setBounds(22, 169, 182, 30);
-		SeleccionarCategoria.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		SeleccionarCategoria.setModel(new DefaultComboBoxModel(new String[] {"SELECCIONAR CATEGORIA", "Carne", "Pescados", "Postres", "Refrescos", "mariscos"}));
-		frame.getContentPane().add(SeleccionarCategoria);
-		
-		JComboBox ElegirCliente = new JComboBox();
-		ElegirCliente.setBounds(22, 122, 182, 36);
-		ElegirCliente.setModel(new DefaultComboBoxModel(new String[] {"ELEGIR CLIENTE", "1", "2", "3", "4", "5"}));
-		frame.getContentPane().add(ElegirCliente);
 		
 		JLabel lblNewLabel = new JLabel("PEDIDO");
 		lblNewLabel.setFont(new Font("SimSun", Font.BOLD | Font.ITALIC, 25));
@@ -109,7 +90,8 @@ public class INICIARNUEVOPEDIDO {
 		frame.getContentPane().add(lblNewLabel);
 		
 		CANTIDAD_PEDIDO = new JTextField();
-		CANTIDAD_PEDIDO.setBounds(22, 210, 182, 30);
+		CANTIDAD_PEDIDO.setText("CANTIDAD_PEDIDO");
+		CANTIDAD_PEDIDO.setBounds(22, 176, 182, 30);
 		frame.getContentPane().add(CANTIDAD_PEDIDO);
 		CANTIDAD_PEDIDO.setColumns(10);
 		
@@ -120,19 +102,36 @@ public class INICIARNUEVOPEDIDO {
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
 			},
 			new String[] {
-				"CANTIDAD_PEDIDO", "PEDIDO_CLIENTE", "ID_CLIENTE", "ID_PEDIDO"
+				"ID_PEDIDO", "CANTIDAD_PEDIDO"
 			}
 		));
 		scrollPane.setViewportView(table);
+		
+		txtIdpedido = new JTextField();
+		txtIdpedido.setText("ID_PEDIDO");
+		txtIdpedido.setBounds(22, 120, 182, 30);
+		frame.getContentPane().add(txtIdpedido);
+		txtIdpedido.setColumns(10);
+		
+		//BOTON LISTAR PERMITE VER TODOS LOS PEDIDOS
+		JButton btnNewButton_5 = new JButton("LISTAR PEDIDOS");
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				table.setModel(conexion.ConsultaTablaListarINICIARNUEVOPEDIDO());
+			}
+		});
+		btnNewButton_5.setBounds(556, 337, 163, 39);
+		frame.getContentPane().add(btnNewButton_5);
 	}
 }

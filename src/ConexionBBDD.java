@@ -260,6 +260,31 @@ public class ConexionBBDD {
 			
 		}
 		
+		public DefaultTableModel ConsultaTablaListarINICIARNUEVOPEDIDO() {
+			String [] columnas={"ID_PEDIDO","CANTIDAD_PEDIDO"};
+			String [] registro=new String[5];
+			DefaultTableModel ModeloTabla = new DefaultTableModel(null,columnas);
+			String query = "SELECT * FROM "+ esquema +".PEDIDO ORDER BY ID_PEDIDO ASC";
+			 
+			try {
+				Statement stmt = conexion.createStatement();
+				ResultSet rset = stmt.executeQuery(query);
+				while(rset.next()) {
+					 registro[0]=rset.getString("ID_PEDIDO");
+			         registro[1]=rset.getString("CANTIDAD_PEDIDO");
+			         
+			         ModeloTabla.addRow(registro);
+				}
+				rset.close();
+				stmt.close();
+				
+			}catch (SQLException s){
+				s.printStackTrace();
+			}
+			
+			return ModeloTabla;
+		}
+		
 		public void FicheroINI () {
 			
 			Properties propiedades = new Properties();
