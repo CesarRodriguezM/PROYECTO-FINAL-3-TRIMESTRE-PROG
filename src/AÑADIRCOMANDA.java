@@ -13,6 +13,8 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class AÑADIRCOMANDA {
 
@@ -72,6 +74,21 @@ public class AÑADIRCOMANDA {
 		frame.getContentPane().add(scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				int seleccion = table.rowAtPoint(arg0.getPoint());
+				txtSeleccionaCantidad.setText((String)table.getValueAt(seleccion, 0));
+				txtSeleccionaProducto.setText((String)table.getValueAt(seleccion, 1));
+				txtSeleccionaCliente.setText((String)table.getValueAt(seleccion, 2));
+				txtSeleccionaIdPedido.setText((String)table.getValueAt(seleccion, 3));
+				
+				CANTIDAD_PEDIDO = txtSeleccionaCantidad.getText();
+				PEDIDO_CLIENTE = txtSeleccionaProducto.getText();
+				ID_CLIENTE = txtSeleccionaCliente.getText();
+				ID_PEDIDO = txtSeleccionaIdPedido.getText();
+			}
+		});
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null},
@@ -107,7 +124,7 @@ public class AÑADIRCOMANDA {
 				
 			}
 		});
-		btnAadir.setBounds(50, 328, 89, 23);
+		btnAadir.setBounds(50, 328, 118, 23);
 		frame.getContentPane().add(btnAadir);
 		//BOTON ELIMINAR PEDIDO
 		JButton btnBorrar = new JButton("ELIMINAR PEDIDO");
@@ -122,12 +139,8 @@ public class AÑADIRCOMANDA {
 				
 			}
 		});
-		btnBorrar.setBounds(178, 328, 125, 23);
+		btnBorrar.setBounds(221, 328, 165, 23);
 		frame.getContentPane().add(btnBorrar);
-		
-		JButton btnModificarComanda = new JButton("MODIFICAR COMANDA");
-		btnModificarComanda.setBounds(326, 328, 146, 23);
-		frame.getContentPane().add(btnModificarComanda);
 		
 		JButton btnAtras = new JButton("ATRAS");
 		btnAtras.addActionListener(new ActionListener() {
@@ -180,7 +193,7 @@ public class AÑADIRCOMANDA {
 				table.setModel(conexion.ConsultaTablaListarComanda());
 			}
 		});
-		btnListarPedidos.setBounds(482, 328, 125, 23);
+		btnListarPedidos.setBounds(433, 328, 174, 23);
 		frame.getContentPane().add(btnListarPedidos);
 		//BOTON BORRAR CAMPOS TEXT
 		JButton btnBorrar_1 = new JButton("BORRAR");
