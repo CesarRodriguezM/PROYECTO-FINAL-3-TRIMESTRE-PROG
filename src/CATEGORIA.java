@@ -127,7 +127,8 @@ public class CATEGORIA {
 				
 				DefaultTableModel data = (DefaultTableModel) table.getModel();
 				data.addRow(new Object[]{ID_CAT,NOM,DESCRIPCION});
-				conexion.ConsultaAñadirListarCATEGORIA();
+				conexion.ConsultaAñadirListarCATEGORIA();//ENLACE A CONEXION BBDD
+				table.setModel(conexion.ConsultaTablaListarCATEGORIA()); //ACTUALIZAR BASE DE DATOS CUANDO LE DEMOS AL BOTON AÑADIR
 					
 				}
 			
@@ -144,7 +145,8 @@ public class CATEGORIA {
 				DESCRIPCION = descripcion.getText();
 				
 				
-				conexion.ConsultaModificarCATEGORIA();
+				conexion.ConsultaModificarCATEGORIA();//ENLACE A CONEXION BBDD
+				table.setModel(conexion.ConsultaTablaListarCATEGORIA()); //ACTUALIZAR BASE DE DATOS CUANDO LE DEMOS AL BOTON MODIFICAR
 				
 			}
 		});
@@ -162,7 +164,7 @@ public class CATEGORIA {
 				Nom_categoria.setText("");
 				descripcion.setText("");
 				
-				conexion.ConsultaBORRARCATEGORIA();
+				
 				
 				
 			}

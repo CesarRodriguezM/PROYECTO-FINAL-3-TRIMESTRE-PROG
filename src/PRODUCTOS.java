@@ -233,6 +233,7 @@ public class PRODUCTOS {
 				
 				
 				conexion.ConsultaModificarPRODUCTOS(); //ENLACE A CONEXION BBDD
+				table.setModel(conexion.ConsultaTablaListarPRODUCTOS());//ACTUALIZAR BASE DE DATOS CUANDO LE DEMOS AL BOTON MODIFICAR
 			}
 		});
 		btnModificar.setBounds(184, 379, 163, 34);
@@ -244,7 +245,8 @@ public class PRODUCTOS {
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				conexion.ConsultaBORRARPRODUCTO();
+				conexion.ConsultaBORRARPRODUCTO();//ENLACE A CONEXION BBDD
+				table.setModel(conexion.ConsultaTablaListarPRODUCTOS());//ACTUALIZAR BASE DE DATOS CUANDO LE DEMOS AL BOTON BORRAR
 			}
 		});
 		btnNewButton_5.setBounds(360, 379, 163, 34);
@@ -256,7 +258,8 @@ public class PRODUCTOS {
 			public void actionPerformed(ActionEvent e) {
 				
 				
-				table.setModel(conexion.ConsultaTablaListarPRODUCTOS()); // CONEXION A CONEXION BBDD
+				table.setModel(conexion.ConsultaTablaListarPRODUCTOS()); // CONEXION A CONEXION BBDD ACTUALIZA LA LISTA
+			
 			}
 		});
 		
