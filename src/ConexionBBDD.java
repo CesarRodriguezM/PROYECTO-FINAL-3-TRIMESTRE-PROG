@@ -285,6 +285,42 @@ public class ConexionBBDD {
 			return ModeloTabla;
 		}
 		
+		public int ConsultaAñadirINICIARNUEVOPEDIDO() {
+			int resultado = 0;
+			String update = "INSERT INTO "+ esquema +".PEDIDO VALUES ("+INICIARNUEVOPEDIDO.ID_PED + " , '" + INICIARNUEVOPEDIDO.CANT_PED + "')";
+			System.out.println(update);
+			try {
+				Statement stmt = conexion.createStatement();
+				int rset = stmt.executeUpdate(update );
+				
+				stmt.close();
+				
+			}catch (SQLException s){
+				s.printStackTrace();
+			}
+			return resultado;
+			
+		}
+		
+		public int ConsultaborrarINICIARNUEVOPEDIDO() {
+			
+			int resultado = 0;
+			String update = "DELETE "+ esquema +".PEDIDO WHERE ID_PEDIDO="+INICIARNUEVOPEDIDO.ID_PED + "  AND CANTIDAD_PEDIDO='" + INICIARNUEVOPEDIDO.CANT_PED + "'";
+			System.out.println(update);
+			try {
+				Statement stmt = conexion.createStatement();
+				int rset = stmt.executeUpdate(update);
+				
+				stmt.close();
+				
+			}catch (SQLException s){
+				s.printStackTrace();
+			}
+			return resultado;
+			
+		}
+		
+		
 		public void FicheroINI () {
 			
 			Properties propiedades = new Properties();

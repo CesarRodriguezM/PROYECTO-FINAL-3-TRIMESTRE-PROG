@@ -14,6 +14,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JScrollPane;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class INICIARNUEVOPEDIDO {
 
@@ -22,6 +24,8 @@ public class INICIARNUEVOPEDIDO {
 	private JTable table;
 	private JTextField txtIdpedido;
 	private ConexionBBDD conexion;
+	static String ID_PED;
+	static String CANT_PED;
 
 	/**
 	 * Launch the application.
@@ -68,18 +72,53 @@ public class INICIARNUEVOPEDIDO {
 		});
 		frame.getContentPane().add(btnNewButton_1);
 		
+		//BOTOÓN AÑADIR
 		JButton btnNewButton_2 = new JButton("A\u00D1ADIR PEDIDO");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				ID_PED=txtIdpedido.getText();
+				CANT_PED=CANTIDAD_PEDIDO.getText();
+				
+				conexion.ConsultaAñadirINICIARNUEVOPEDIDO();
+				table.setModel(conexion.ConsultaTablaListarINICIARNUEVOPEDIDO());
+				
+			}
+		});
 		btnNewButton_2.setBounds(22, 337, 201, 39);
 		frame.getContentPane().add(btnNewButton_2);
 		
+		
+		//BORRA LOS TEXTFIELD PARA DEJAR LOS CAMPOS VACIOS
 		JButton btnNewButton_3 = new JButton("BORRAR ");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				txtIdpedido.setText("");
+				CANTIDAD_PEDIDO.setText("");
+				
+				
+			}
+		});
+		
+		
 		btnNewButton_3.setBounds(33, 234, 163, 39);
 		frame.getContentPane().add(btnNewButton_3);
+		
+		//BOTON ELIMINAR PEDIDO 
 		
 		JButton btnNewButton_4 = new JButton("ELIMINAR PEDIDO");
 		btnNewButton_4.setBounds(301, 338, 182, 36);
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				ID_PED=txtIdpedido.getText();
+				CANT_PED=CANTIDAD_PEDIDO.getText();
+				
+				conexion.ConsultaborrarINICIARNUEVOPEDIDO();//ENLACE A CONEXION BBDD
+				table.setModel(conexion.ConsultaTablaListarINICIARNUEVOPEDIDO());
+				
+				
 			}
 		});
 		frame.getContentPane().add(btnNewButton_4);
@@ -99,7 +138,19 @@ public class INICIARNUEVOPEDIDO {
 		scrollPane.setBounds(314, 88, 420, 185);
 		frame.getContentPane().add(scrollPane);
 		
+		
+		// EVENTO QUE PERMITE SELECCIONAR LA TABLA Y LLEVAR LOS DATOS DE ESTA A LOS CAMPOS DE TEXTO
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				int seleccion = table.rowAtPoint(arg0.getPoint());
+				txtIdpedido.setText((String)table.getValueAt(seleccion, 0));
+				CANTIDAD_PEDIDO.setText((String)table.getValueAt(seleccion, 1));
+				
+			}
+		});
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null},
